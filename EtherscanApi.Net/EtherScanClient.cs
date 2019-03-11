@@ -1,5 +1,7 @@
-﻿using EtherscanApi.Net.Objects;
+﻿using EtherscanApi.Net.Converters;
+using EtherscanApi.Net.Objects;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -23,7 +25,10 @@ namespace EtherscanApi.Net.Interfaces
                 {"action", "balance" },
                 {"address", address }
             };
-            return GetResult<decimal>(parameters);
+            var result = GetResult<decimal>(parameters);
+            if (result.Success)
+                result.Result = UnitConversion.Convert.FromWei(new System.Numerics.BigInteger(result.Result), UnitConversion.EthUnit.Ether);
+            return result;
         }
 
         public EtherScanDefaultResponse<List<BatchAddressBalance>> GetEtherBalances(List<string> address)

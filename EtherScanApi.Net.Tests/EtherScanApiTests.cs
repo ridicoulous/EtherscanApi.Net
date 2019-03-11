@@ -23,7 +23,7 @@ namespace EtherScanApi.Net.Tests
         [Fact]
         public void Should_Return_TxList()
         {
-            var res = _client.GetTransactions("0x6fea7665684584884124c1867d7ec31b56c43383");
+            var res = _client.GetTransactions("0x6fea7665684584884124c1867d7ec31b56c43381");
           //  Assert.True(res.Result.Any());
             Assert.True(res.Success);
         }
