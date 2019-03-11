@@ -7,7 +7,7 @@ namespace EtherScanApi.Net.Tests
 {
     public class EtherScanApiTests
     {
-        EtherScanClient _client = new EtherScanClient("P2ZVEYIIEWSNDEUVHSTDC5Z7ZHC6IHVTWJ");
+        EtherScanClient _client = new EtherScanClient("");
         [Fact]
         public void Should_Return_Contract_Info()
         {
