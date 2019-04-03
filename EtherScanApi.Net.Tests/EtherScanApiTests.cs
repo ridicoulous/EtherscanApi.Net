@@ -1,5 +1,4 @@
 using EtherscanApi.Net.Interfaces;
-using System;
 using System.Linq;
 using Xunit;
 
@@ -23,9 +22,38 @@ namespace EtherScanApi.Net.Tests
         [Fact]
         public void Should_Return_TxList()
         {
-            var res = _client.GetTransactions("0xe4C89B9Fcab29c5BEe3971b698cca4528f2644e2", 6220000);            
-          //  Assert.True(res.Result.Any());
-            Assert.True(res.Success);
+            int? page = 1;
+            while (page.HasValue)
+            {
+                var request = _client.GetTransactions("0xe4C89B9Fcab29c5BEe3971b698cca4528f2644e2", 6220000, page: page.Value, limit: 10);
+                if (request.Success && request.Result.Any())
+                {
+                    var result = request.Result.Select(
+                    f => new
+                    {
+                        Amount = f.Value,
+                        Coin = "ETH",
+                        Exchange = "KUNA",
+                        FromId = f.FromId,
+                        Timestamp = f.TimeStamp,
+                        ToId = f.ToId,
+                        ContractAddress = f.contractAddress,
+                        IsValid = !f.IsError,
+                        BlockNumber = f.BlockNumber,
+                        f.TxId
+                    });
+
+                    var t = request.Result.Max(c => c.TimeStamp);
+                    System.Diagnostics.Trace.Write(t);
+                    page++;
+                }
+                else
+                {
+                    page = null;
+                }
+            }
+
+            Assert.True(1 == 1);
         }
     }
 }

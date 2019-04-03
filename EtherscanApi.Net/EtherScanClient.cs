@@ -47,7 +47,7 @@ namespace EtherscanApi.Net.Interfaces
             return GetResult<List<SmartContract>>(parameters);
         }
 
-        public EtherScanDefaultResponse<List<Transaction>> GetTransactions(string address, ulong? fromBlock = null, ulong? toBlock = null, string sort = "asc", int page=1, int limit=10000)
+        public EtherScanDefaultResponse<List<Transaction>> GetTransactions(string address, ulong? fromBlock = null, ulong? toBlock = null, string sort = "asc", int? page=1, int? limit=1000)
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -55,10 +55,10 @@ namespace EtherscanApi.Net.Interfaces
                 {"action", "txlist" },
                 {"address", address },
                 {"startblock",fromBlock },
-                {"endblock",toBlock },
+                {"endblock",toBlock??99999999 },
                 {"sort",sort },
                 {"page",page },
-                {"limit",limit }
+                {"offset",limit }
 
             };
             return GetResult<List<Transaction>>(parameters);
