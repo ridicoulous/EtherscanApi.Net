@@ -8,7 +8,7 @@ namespace EtherscanApi.Net.Interfaces
     public interface IEtherScanClient
     {
         EtherScanDefaultResponse<decimal> GetEtherBalance(string address);
-        EtherScanDefaultResponse<List<Transaction>> GetTransactions(string address, ulong? fromBlock = null, ulong? toBlock = null, string sort = "asc");
+        EtherScanDefaultResponse<List<Transaction>> GetTransactions(string address, ulong? fromBlock = null, ulong? toBlock = null, string sort = "asc", int page = 1, int limit = 10000);
 
         EtherScanDefaultResponse<List<BatchAddressBalance>> GetEtherBalances(List<string> address);
 

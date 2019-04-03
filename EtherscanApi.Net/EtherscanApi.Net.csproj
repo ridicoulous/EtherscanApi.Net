@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.1</Version>
+    <Version>0.0.2</Version>
     <Description>Small library to interact with etherscan API. I use converters from Nethereum library</Description>
     <PackageTags>etherscan etherscan-api api-wrapper</PackageTags>
     <Copyright>ridicoulous</Copyright>
