@@ -1,7 +1,6 @@
 ﻿using EtherscanApi.Net.Converters;
 using EtherscanApi.Net.Objects;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -47,7 +46,7 @@ namespace EtherscanApi.Net.Interfaces
             return GetResult<List<SmartContract>>(parameters);
         }
 
-        public EtherScanDefaultResponse<List<Transaction>> GetTransactions(string address, ulong? fromBlock = null, ulong? toBlock = null, string sort = "asc", int? page=1, int? limit=1000)
+        public EtherScanDefaultResponse<List<Transaction>> GetTransactions(string address, ulong? fromBlock = null, ulong? toBlock = null, string sort = "asc", int? page = 1, int? limit = 1000)
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -80,6 +79,27 @@ namespace EtherscanApi.Net.Interfaces
             return GetResult<List<Transaction>>(parameters);
         }
 
+        public EtherScanDefaultResponse<List<Erc20TokenTransfer>> GetErc20TokenTransfers(string address, string contract = null, ulong? fromBlock = null, ulong? toBlock = null, string sort = "asc", int? page = 1, int? limit = 1000)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                {"module", "account" },
+                {"action", "tokentx" },
+                {"address", address },
+
+                {"startblock",fromBlock },
+                {"endblock",toBlock??99999999 },
+                {"sort",sort },
+                {"page",page },
+                {"offset",limit }
+
+            };
+            if (!string.IsNullOrEmpty(contract))
+            {
+                parameters.Add("contractaddress", contract);
+            }
+            return GetResult<List<Erc20TokenTransfer>>(parameters);
+        }
 
         private string ConstructRequest(Dictionary<string, object> parameters)
         {
@@ -95,7 +115,7 @@ namespace EtherscanApi.Net.Interfaces
                 string httpApiResult = wc.DownloadString(ConstructRequest(parameters));
                 return JsonConvert.DeserializeObject<EtherScanDefaultResponse<T>>(httpApiResult);
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
                 return new EtherScanDefaultResponse<T>() { Message = "Unable to deserialize response" };
             }

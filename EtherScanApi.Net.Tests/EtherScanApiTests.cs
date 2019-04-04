@@ -27,5 +27,14 @@ namespace EtherScanApi.Net.Tests
 
             Assert.True(1 == 1);
         }
+        [Fact]
+        public void Should_Return_Erc20TxList()
+        {
+            var requestNormal = _client.GetErc20TokenTransfers("0xe4c89b9fcab29c5bee3971b698cca4528f2644e2",null, 6220000, page: 1, limit: 100);
+
+          //  var request = _client.GetInternalTransactions("0x004be92725a0979b9de76ee58330b00bb2f7a82a", 6220000, page: 1, limit: 1000);
+
+            Assert.True(1 == 1);
+        }
     }
 }

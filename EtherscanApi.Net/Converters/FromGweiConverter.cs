@@ -8,6 +8,12 @@ namespace EtherscanApi.Net.Converters
 {
     public class FromGweiConverter : JsonConverter
     {
+       
+        public FromGweiConverter()
+        {
+            
+        }
+
         public override bool CanConvert(Type objectType)
         {
             return false;
@@ -18,7 +24,7 @@ namespace EtherscanApi.Net.Converters
             if (reader.Value == null)
                 return null;
             BigInteger val = BigInteger.Parse(reader.Value.ToString());
-            var decin = UnitConversion.Convert.FromWei(val, UnitConversion.EthUnit.Ether);
+            var decin = UnitConversion.Convert.FromWei(val,18);            
             return decin;
         }
 
