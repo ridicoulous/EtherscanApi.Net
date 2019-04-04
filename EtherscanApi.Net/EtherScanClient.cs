@@ -63,8 +63,23 @@ namespace EtherscanApi.Net.Interfaces
             };
             return GetResult<List<Transaction>>(parameters);
         }
+        public EtherScanDefaultResponse<List<Transaction>> GetInternalTransactions(string address, ulong? fromBlock = null, ulong? toBlock = null, string sort = "asc", int? page = 1, int? limit = 1000)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                {"module", "account" },
+                {"action", "txlistinternal" },
+                {"address", address },
+                {"startblock",fromBlock },
+                {"endblock",toBlock??99999999 },
+                {"sort",sort },
+                {"page",page },
+                {"offset",limit }
 
-      
+            };
+            return GetResult<List<Transaction>>(parameters);
+        }
+
 
         private string ConstructRequest(Dictionary<string, object> parameters)
         {

@@ -3,13 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.3</Version>
+    <Version>0.0.4</Version>
     <Description>Small library to interact with etherscan API. I use converters from Nethereum library</Description>
     <PackageTags>etherscan etherscan-api api-wrapper</PackageTags>
     <Copyright>ridicoulous</Copyright>
     <PackageProjectUrl>https://github.com/ridicoulous/EtherscanApi.Net</PackageProjectUrl>
-    <AssemblyVersion>0.0.3.0</AssemblyVersion>
-    <PackageReleaseNotes>fix pagination</PackageReleaseNotes>
+    <AssemblyVersion>0.0.4.0</AssemblyVersion>
+    <PackageReleaseNotes>add internal txs</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
